@@ -1,5 +1,5 @@
 """
-    Package PSSFSS v$(pkgversion(PSSFSS))
+    Package PSSFSS v$(pkgversion(myPSSFSS))
 
 `PSSFSS` is a software package for the analysis of planar polarization and frequency selective surfaces (PSSs and FSSs).
 The user specifies the geometry to be analyzed as a `Vector` containing two or more dielectric [`Layer`](@ref)s
@@ -12,7 +12,7 @@ can be conveniently visualized using the `plot` command of the `Plots` package.
 
 Extensive documentation is available at https://simonp0420.github.io/PSSFSS.jl/
 """
-module PSSFSS
+module myPSSFSS
 
 if isdefined(Base, :Experimental) && isdefined(Base.Experimental, Symbol("@optlevel"))
     @eval Base.Experimental.@optlevel 3
@@ -309,14 +309,14 @@ performance parameters that are supported by the [`@outputs`](@refs) macro.
 """
 function _analyze(layers, sheets, junc, freqs, stkeys, stvalues;
     outlist=[], resultfile="pssfss.res", showprogress::Bool=true, tstart=time(), fastsweep=true)
-    showprogress && println("Beginning PSSFSS Analysis")
+    showprogress && println("Beginning myPSSFSS Analysis")
     ncount = 0 # Number of analyses performed
     ntotal = length(freqs) * length(stvalues[1]) * length(stvalues[2])
     showprogress && (progress = Progress(ntotal; dt = 1, enabled = !_is_ijulia()))
     showprogress && update!(progress, 0)
     isfile(resultfile) && rm(resultfile)
     date, clock = split(string(now()), 'T')
-    pssfssv = PkgVersion.Version(PSSFSS)
+    pssfssv = PkgVersion.Version(myPSSFSS)
     ss = "Environment"
     io = IOBuffer()
     versioninfo(io)
@@ -328,7 +328,7 @@ function _analyze(layers, sheets, junc, freqs, stkeys, stvalues;
         juliainfo *= "  Threads.nthreads() = $(Threads.nthreads())\n"
     end
     juliainfo *= string("Running under: ", run_environment())
-    @logfile "\n\nStarting PSSFSS $(pssfssv) analysis on $(date) at $(clock)\n$(juliainfo)\n\n"
+    @logfile "\n\nStarting myPSSFSS $(pssfssv) analysis on $(date) at $(clock)\n$(juliainfo)\n\n"
     check_inputs(layers, sheets, junc, freqs, stkeys, stvalues, outlist)
     k0min, k0max = twopi * 1e9 / c₀ .* extrema(freqs)
     gbls = choose_gblocks(layers, sheets, junc, k0min)
@@ -410,7 +410,7 @@ function _analyze(layers, sheets, junc, freqs, stkeys, stvalues;
 
     date, clock = split(string(now()), 'T')
     telapsed = round(time() - tstart, digits=1)
-    @logfile "\n\n PSSFSS analysis exiting on $(date) at $(clock) ($(telapsed) seconds elapsed time)\n\n"
+    @logfile "\n\n myPSSFSS analysis exiting on $(date) at $(clock) ($(telapsed) seconds elapsed time)\n\n"
     showprogress && println("")
     return results
 end # function

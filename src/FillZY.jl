@@ -12,14 +12,14 @@ using OffsetArrays
 using MetalSurfaceImpedance: Zsurface
 using Unitful # for ustrip and u"m"
 using LinearAlgebra: norm, ⋅
-using PSSFSS.Constants: μ₀, ϵ₀, c₀, twopi, fourpi, tol, tdigits
-using PSSFSS.Layers: Layer
-using PSSFSS.Sheets: RWGSheet, facecount
-using PSSFSS.RWG: RWGData
-using PSSFSS.PGF: c3_calc, d3_calc
-using PSSFSS.Zint: zint, filljk!, vtxcrd
-using PSSFSS.PGF: electric_modal_sum_funcs, magnetic_modal_sum_funcs
-using PSSFSS.Log: @logfile
+using myPSSFSS.Constants: μ₀, ϵ₀, c₀, twopi, fourpi, tol, tdigits
+using myPSSFSS.Layers: Layer
+using myPSSFSS.Sheets: RWGSheet, facecount
+using myPSSFSS.RWG: RWGData
+using myPSSFSS.PGF: c3_calc, d3_calc
+using myPSSFSS.Zint: zint, filljk!, vtxcrd
+using myPSSFSS.PGF: electric_modal_sum_funcs, magnetic_modal_sum_funcs
+using myPSSFSS.Log: @logfile
 using OhMyThreads: @localize, @tasks, @set, DynamicScheduler, StaticScheduler
 
 const next = (2, 3, 1)
